@@ -1,0 +1,69 @@
+#! /bin/bash
+btn7=0
+fullline=0
+bw_tool  -I -D /dev/i2c-1 -a 94 -w 10:00
+bw_tool  -I -D /dev/i2c-1 -a 94 -w 11:00
+count=0
+while [ $btn7 -eq 0 ]; do
+btn1=$(bw_tool  -I -D /dev/i2c-1 -a 94 -R 40)
+btn2=$(bw_tool  -I -D /dev/i2c-1 -a 94 -R 41)
+btn3=$(bw_tool  -I -D /dev/i2c-1 -a 94 -R 42)
+btn4=$(bw_tool  -I -D /dev/i2c-1 -a 94 -R 43)
+btn5=$(bw_tool  -I -D /dev/i2c-1 -a 94 -R 44)
+btn6=$(bw_tool  -I -D /dev/i2c-1 -a 94 -R 45)
+
+if [ "$btn6" -eq 01 ]; then
+bw_tool  -I -D /dev/i2c-1 -a 94 -w 10:00
+bw_tool -I -D /dev/i2c-1 -a 94 -t "Not implemented"
+sleep 0.3
+fi
+
+
+if [ "$btn5" -eq 01 ]; then
+bw_tool  -I -D /dev/i2c-1 -a 94 -w 10:00
+bw_tool  -I -D /dev/i2c-1 -a 94 -t "DR Radio P1"
+mpc load http://live-icy.gss.dr.dk/A/A03H.mp3.m3u
+mpc play
+echo DR p1
+sleep 0.3
+fi
+if [ "$btn4" -eq 01 ]; then
+mpc stop
+bw_tool  -I -D /dev/i2c-1 -a 94 -w 10:00
+bw_tool -I -D /dev/i2c-1 -a 94 -t "Stopped"
+sleep 0.3
+fi
+
+if [ "$btn3" -eq 01 ]; then
+mpc stop
+bw_tool  -I -D /dev/i2c-1 -a 94 -w 10:00
+bw_tool -I -D /dev/i2c-1 -a 94 -t "Not implemented"
+sleep 0.3
+fi
+
+if [ "$btn2" -eq 01 ]; then
+mpc volume +5
+bw_tool  -I -D /dev/i2c-1 -a 94 -w 10:00
+bw_tool -I -D /dev/i2c-1 -a 94 -t "Vol +"
+sleep 0.5
+bw_tool  -I -D /dev/i2c-1 -a 94 -w 10:00
+bw_tool  -I -D /dev/i2c-1 -a 94 -t "DR Radio P1"
+fi
+
+if [ "$btn1" -eq 01 ]; then
+mpc volume -5
+bw_tool  -I -D /dev/i2c-1 -a 94 -w 10:00
+bw_tool -I -D /dev/i2c-1 -a 94 -t "Vol -"
+sleep 0.5
+bw_tool  -I -D /dev/i2c-1 -a 94 -w 10:00
+bw_tool  -I -D /dev/i2c-1 -a 94 -t "DR Radio P1"
+fi
+
+
+
+#echo "6: $btn6 - 5: $btn5 - 4: $btn4 - 3: $btn3 - 2: $btn2 - 1: $btn1"
+#sleep 0.2
+#clear
+done
+
+

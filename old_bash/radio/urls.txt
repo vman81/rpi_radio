@@ -1,0 +1,9 @@
+
+P1
+http://live-icy.gss.dr.dk/A/A03H.mp3.m3u
+
+P2
+http://live-icy.gss.dr.dk/A/A04H.mp3.m3u
+
+P3:
+http://live-icy.gss.dr.dk/A/A03H.mp3.m3u
